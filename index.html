@@ -28,7 +28,7 @@
 class: center, middle, inverse
 
 
-# Résultats du Projet ANR WAVE 
+# Résultats du Projet ANR WAVE
 
 Séminaire Recherche et Technologie - Ircam
 
@@ -40,8 +40,8 @@ Samuel Goldszmidt, Benjamin Matuszewski et Norbert Schnell
 
 ## Contexte Ircam
   * Publication en ligne
-    * Base de données (*BRAHMS* et autres), 
-    * Musicologie numérique (*Ecoutes signées* et autres), 
+    * Base de données (*BRAHMS* et autres),
+    * Musicologie numérique (*Ecoutes signées* et autres),
   * Logiciels d'informatique musicale
 
 <img src='./media/img/iMubu.png' height=200px/>
@@ -52,8 +52,8 @@ Samuel Goldszmidt, Benjamin Matuszewski et Norbert Schnell
 # Point de départ, Web Audio / Ircam en 2010
 
 ## Ecosystème Web
-  * **Standards et technologies émergentes**   
-    * Web Audio API (2010) 
+  * **Standards et technologies émergentes**
+    * Web Audio API (2010)
     * Liés au champ Web Audio : HTML5 (2008 audio element), WebSocket API, WebRTC (getUserMedia), HTTP streaming (DASH), Web Midi API, MediaStream Recording, Audio output devices API, Geolocation API, Device Orientation et Device Motion API, Presentation API ...
     * JavaScript  ("es6/7, doc, test, coverage")
   * **Open source** (Licence, GitHub - [Ircam-rnd](https://github.com/Ircam-RnD)) et **Open Data**
@@ -62,15 +62,15 @@ Samuel Goldszmidt, Benjamin Matuszewski et Norbert Schnell
 
 ---
 # Point de départ, Web Audio / Ircam en 2010
-  
 
-> **Technologies audio faiblement exploitées sur le web**  
+
+> **Technologies audio faiblement exploitées sur le web**
     (Deezer, Spotify, The Echo Nest, SoundCloud : des services simples)
 
 <center>(...)</center>
 
-* Soumission du projet WAVE en 2011 (Ircam, Eurecom, UMPCF, Vi-live)  
-* Présentation à *Janus 2* en mars 2012 
+* Soumission du projet WAVE en 2011 (Ircam, Eurecom, UMPCF, Vi-live)
+* Présentation à *Janus 2* en mars 2012
 
 <center>(...)</center>
 
@@ -110,7 +110,7 @@ Même si les applications propriétaire ont des fonctionnalités débridées par
 
 > Dans le cadre du projet WAVE
 
-  * Formalisation 
+  * Formalisation
     * des cas d'usage existants et innovants
       * musicologie numérique (APM)
       * musicaux (ISSM)
@@ -121,11 +121,11 @@ Même si les applications propriétaire ont des fonctionnalités débridées par
 
 ???
 ## Transferts de savoirs et technologies vers le web
-* Formalisation : 
+* Formalisation :
   * spéfications fonctionnelles en regard d'application déjà développées (ex. MuBu, AudioSculpt)
   * spécifications techniques : ne pas simplement wrapper un standard mais adresser un problème d'informatique musicale au delà des standards existants
 * Démonstrateurs pour validation => re-développement de dev flash
-* Transferts de savoir et technologies : 
+* Transferts de savoir et technologies :
   * avec un 'avantage' pour les contenus musicologiques, c'est qu'ils ne vieillissent pas. ("migration techniques")
   * interroger, brièvement encore, les possibles "web audio" pour la recherche à l'Ircam
 
@@ -133,7 +133,7 @@ Même si les applications propriétaire ont des fonctionnalités débridées par
 
 ## Synergies, collaborations, disséminations
   * Equipes de recherche (APM, ISMM, EAC ...) - des projets transversaux
-  * WAC - Web Audio Conference 
+  * WAC - Web Audio Conference
     * 2015 Ircam/Mozilla Paris
     * 2016 GeorgiaTech/Atlanta
   * **CoSiMa** (+ résidence artistique)
@@ -146,7 +146,7 @@ musicologues, développeurs, chercheurs ET 3 types d'utilisateurs de nos libs 'u
 
 ---
 
-# Librairies waves.js 
+# Librairies waves.js
 
   * [waves.js](https://github.com/wavesjs)
     * Une librairie pour faciliter le développement d'app Web Audio
@@ -164,11 +164,86 @@ musicologues, développeurs, chercheurs ET 3 types d'utilisateurs de nos libs 'u
 
 ---
 
+# _UI_
+
+<center><img src="./media/img/ui-classes.png" width="90%" /></center>
+
+#### `Timeline` > `Tracks` > `Layers` > `Shapes`
+
+???
+Demos :
+- `2015-12-02-demos-ui/waveform-visualizer-component`
+  * !!! à lancer avec `http-server` !!!
+  * html tag
+  * description du code js (timeline, tracks, layers, interactions)
+  * remplacement du `WaveformHelper` par la version bas niveau
+
+- `2015-12-02-demos-ui/playback-control`
+
+---
+
+# _UI_
+
+<center><img src="./media/img/ui-classes.png" width="90%" /></center>
+
+#### `Timeline` > `Tracks` > `Layers` > `Shapes`
+#### + `EventSource`, `States` _et_ `Behaviors` _pour les interactions_
+
+???
+Demos :
+- `2015-12-02-demos-ui/waveform-visualizer-component`
+  * !!! à lancer avec `http-server` !!!
+  * html tag
+  * description du code js (timeline, tracks, layers, interactions)
+  * remplacement du `WaveformHelper` par la version bas niveau
+
+- `2015-12-02-demos-ui/playback-control`
+
+---
+
+# _LFO_ : formalisation de stream (cf. `PiPo`)
+
+##### Bibliothèque de sources
+
+* Audio : `AudioInBuffer`, `AudioInSource`
+* Données (mouvement, etc.) : `EventIn`
+* Réseau: `SocketClient`, `SocketServer`
+
+##### Bibliothèque de sinks
+
+* Enregistrement: `AudioRecorder`, `DataRecorder`
+* Réseau: `SocketClient`, `SocketServer`
+* Visualisations: `Waveform`, `Bpf`, `Trace`, `Sonogram`, `Spectrogram`
+
+##### Bibliothèque d'opérateurs de streams
+
+* `Biquad`, `Framer`, `Fft`, `Magnitude`, `MinMax`, `MovingAverage`, `MovingMedian`,
+* défini par l'utilisateur: `Operator`
+
+```js
+lfo.operators.Operator({
+  onProcess: (time, frame, metadata) => { /* ... */ }
+});
+```
+
+???
+Démos :
+- `2015-12-02-demos-lfo/sink-visualizers`
+- `2015-12-02-demos-lfo/onset-detector-online`
+- `2015-12-02-demos-lfo/onset-detector-offline`
+  * montrer que seule la source lfo change
+- `2015-12-02-demos-lfo/socket`
+  * penser à lancer le seveur nodeJS
+  * le desktop doit attaquer `sink.html`
+  * le mobile doit attaquer `index.html`
+
+---
+
 # Suite, Web Audio / Ircam à partir de 2016
 
   * **Les standards et technologies**
     * se développent (ex. : W3C music notation group https://www.w3.org/community/music-notation/ Long Term Add Document Object Model (DOM) manipulation and interactivity to MusicXML)
-    * Site institutionnel de l'Ircam, services en lignes, Open Source et Open Data 
+    * Site institutionnel de l'Ircam, services en lignes, Open Source et Open Data
     * *... comment encourager les contributions ?*
   * **La recherche en informatique musicale**
     * User Experience (CoSiMa)
@@ -180,7 +255,7 @@ musicologues, développeurs, chercheurs ET 3 types d'utilisateurs de nos libs 'u
 > *Quelles implications et quelles idées pour le Web Audio dans la recherche à l'Ircam ?*
 
 ???
-service en ligne 
+service en ligne
       * existent déjà (ex. SOFA, aspect contributif aussi, ou "social" type Ulysses)
       * manque "d'agilité" et de réponse aux changements rapides
       * Prestation de développement
@@ -193,7 +268,7 @@ comment encourager les contributions ? nos réponses : pas réinventer la roue e
 
 class: center, middle, inverse
 
-# et HAL ! 
+# et HAL !
 
 
     </textarea>
