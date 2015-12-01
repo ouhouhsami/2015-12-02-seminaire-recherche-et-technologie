@@ -10,13 +10,23 @@
         font-family: 'Yanone Kaffeesatz';
         font-weight: normal;
       }
+            .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 1.2em;
+      }
       .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
     </style>
   </head>
   <body>
     <textarea id="source">
 
-class: center, middle
+class: center, middle, inverse
+
 
 # Résultats du Projet ANR WAVE 
 
@@ -28,21 +38,49 @@ Samuel Goldszmidt, Benjamin Matuszewski et Norbert Schnell
 
 # Point de départ, Web Audio / Ircam en 2010
 
-Soumission du projet WAVE en 2011 (Ircam, Eurecom, UMPCF, Vi-live)  
-Présentation à *Janus 2* en mars 2012 
+## Contexte Ircam
+  * Publication en ligne
+    * Base de données (*BRAHMS* et autres), 
+    * Musicologie numérique (*Ecoutes signées* et autres), 
+  * Logiciels d'informatique musicale
 
-  * **Contexte Ircam**  
-    * Publication en ligne : base de données (*BRAHMS* et autres), "musicologie numérique" (*Ecoutes signées* et autres), 
-    * Des logiciels d'informatique musicale
+<img src='./media/img/iMubu.png' height=200px/>
+<img src='./media/img/medias.ircam.fr.png' height=200px/>
+
+
+---
+# Point de départ, Web Audio / Ircam en 2010
+
+## Ecosystème Web
   * **Standards et technologies émergentes**   
     * Web Audio API (2010) 
-    * **Liées** au champ Web Audio : HTML5 (2008 audio element), WebSocket API, WebRTC (getUserMedia), HTTP streaming (DASH), Web Midi API, MediaStream Recording, Audio output devices API, Geolocation API, Device Orientation et Device Motion API, Presentation API ...
-  * Constat : **Technologies audio faiblement exploitées sur le web** 
-    * Deezer, Spotify, The Echo Nest, SoundCloud : des services simples  
+    * Liés au champ Web Audio : HTML5 (2008 audio element), WebSocket API, WebRTC (getUserMedia), HTTP streaming (DASH), Web Midi API, MediaStream Recording, Audio output devices API, Geolocation API, Device Orientation et Device Motion API, Presentation API ...
+    * JavaScript  ("es6/7, doc, test, coverage")
+  * **Open source** (Licence, GitHub - [Ircam-rnd](https://github.com/Ircam-RnD)) et **Open Data**
+
+<center><img src='./media/img/ircam-rnd.png' height=200px/></center>
+
+---
+# Point de départ, Web Audio / Ircam en 2010
+  
+
+> **Technologies audio faiblement exploitées sur le web**  
+    (Deezer, Spotify, The Echo Nest, SoundCloud : des services simples)
+
+<center>(...)</center>
+
+* Soumission du projet WAVE en 2011 (Ircam, Eurecom, UMPCF, Vi-live)  
+* Présentation à *Janus 2* en mars 2012 
+
+<center>(...)</center>
+
+> Début du projet WAVE en Novembre 2012
 
 ---
 
-> **Pourquoi transférer des savoirs, des technologies, des algorithmes d'informatique musicale de l'Ircam vers la plateforme Web alors qu'elle est technologiquement moins performante ?**
+class: center, middle, inverse
+
+#Pourquoi transférer nos savoirs et technologies d'informatique musicale vers la plateforme Web alors que celle-ci est technologiquement moins performante ?
 
 ???
 Au moment ou le "Web Audio" émergent véritablement pour des applications exigentes
@@ -68,7 +106,10 @@ Même si les applications propriétaire ont des fonctionnalités débridées par
 
 ---
 
-# Transferts de savoirs et technologies vers le web
+## Transferts de savoirs et technologies vers le web
+
+> Dans le cadre du projet WAVE
+
   * Formalisation 
     * des cas d'usage existants et innovants
       * musicologie numérique (APM)
@@ -76,17 +117,7 @@ Même si les applications propriétaire ont des fonctionnalités débridées par
     * spécifications fonctionnelles
     * spécifications techniques
   * Démonstrateurs pour validation
-  * Développement de la librairie *waves.js*
-
----
-
-# Synergies, collaborations, disséminations
-  * Equipes de recherche (APM, ISMM, EAC ...)
-  * "Hands on session" (ex. : avec musicologues, développeurs, chercheurs)
-  * WAC - Web Audio Conference 
-    * 2015 Ircam/Mozilla Paris
-    * 2016 GeorgiaTech/Atlanta
-  * **CoSiMa** (+ résidence artistique)
+  * Développement de la librairie *waves.js* (développé *pour* et *sur* le web)
 
 ???
 ## Transferts de savoirs et technologies vers le web
@@ -98,6 +129,17 @@ Même si les applications propriétaire ont des fonctionnalités débridées par
   * avec un 'avantage' pour les contenus musicologiques, c'est qu'ils ne vieillissent pas. ("migration techniques")
   * interroger, brièvement encore, les possibles "web audio" pour la recherche à l'Ircam
 
+---
+
+## Synergies, collaborations, disséminations
+  * Equipes de recherche (APM, ISMM, EAC ...) - des projets transversaux
+  * WAC - Web Audio Conference 
+    * 2015 Ircam/Mozilla Paris
+    * 2016 GeorgiaTech/Atlanta
+  * **CoSiMa** (+ résidence artistique)
+  * "Hands on session" (ex. : avec musicologues, développeurs, chercheurs)
+
+???
 ## Synergies, collaborations, disséminations
 Norbert : à toi ?
 musicologues, développeurs, chercheurs ET 3 types d'utilisateurs de nos libs 'utilisateurs finaux, développeurs JavaScript et ingénieur traitement du signal'
@@ -106,38 +148,32 @@ musicologues, développeurs, chercheurs ET 3 types d'utilisateurs de nos libs 'u
 
 # Librairies waves.js 
 
-  * [wavesjs](https://github.com/wavesjs)
+  * [waves.js](https://github.com/wavesjs)
     * Une librairie pour faciliter le développement d'app Web Audio
     * Passerelle entre les standards du web et les fonctions primitives des applications musicales
       * [UI](http://wavesjs.github.io/ui/) : afficher/éditer des données audio et temporelles dans le navigateur
-      * [Audio](http://wavesjs.github.io/audio/) : moteur audio et ordonnanceur
       * [LFO](https://github.com/wavesjs/lfo)
-
+      * [Audio](http://wavesjs.github.io/audio/) : moteur audio et ordonnanceur
 
   * [Démonstrateurs](http://wave.ircam.fr/demo/)
-
----
-#Ecosystème Web
-
-* Open source et GitHub (développé *pour* et *sur* le web)
-  * Retour d'expérience positive (stargazers ...)
-  * [Ircam-rnd](https://github.com/Ircam-RnD)
-  * Licence
-* JavaScript
-  * "es6/7, doc, test, coverage"  
+    * Music Information Retrieval "Phoenix"
+    * Musicographie "Bachothèque"
+    * Musicologie "Voi(rex) 3e mouvement"
+    * Pedagogie "Jupiter"
+    * Performance
 
 ---
 
-# Suite, Web Audio / Ircam en 2016 etc.
+# Suite, Web Audio / Ircam à partir de 2016
 
   * **Les standards et technologies**
-    * continuent à se développer (ex. : W3C music notation group https://www.w3.org/community/music-notation/ Long Term Add Document Object Model (DOM) manipulation and interactivity to MusicXML)
-    * Site institutionnel de l'Ircam, services en lignes, Open Data & Open Source
+    * se développent (ex. : W3C music notation group https://www.w3.org/community/music-notation/ Long Term Add Document Object Model (DOM) manipulation and interactivity to MusicXML)
+    * Site institutionnel de l'Ircam, services en lignes, Open Source et Open Data 
     * *... comment encourager les contributions ?*
   * **La recherche en informatique musicale**
     * User Experience (CoSiMa)
     * Projets de résidence
-    * Expériences en ligne
+    * Expériences en ligne ?
     * *et ... ?*
 
 
@@ -155,7 +191,7 @@ comment encourager les contributions ? nos réponses : pas réinventer la roue e
 
 ---
 
-class: center, middle
+class: center, middle, inverse
 
 # et HAL ! 
 
